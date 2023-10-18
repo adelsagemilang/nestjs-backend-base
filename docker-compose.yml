@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  web:
+    image: kanamart-back-office-local
+    build:
+      context: .
+      target: development
+      dockerfile: ./Dockerfile
+    command: npm run start:dev
+    ports:
+    - 3000:3000
+    expose:
+      - '3000'
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - WDS_SOCKET_HOST=127.0.0.1 
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true 
+      - NODE_OPTIONS=--max-old-space-size=16384
